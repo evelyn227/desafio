@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Aula Back-end 3 Ano - Polo Arapongas</title>
+    <style>
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
-   <h1>Calcule a Media do Aluno</h1>
-    <button onclick="validar()">Lançe a media </button>
-<script>
-function validar() {
-conte= 1;
-var media = 0;
-let nome = window.prompt('Qual e seu nome?')
+    <h1>Calcule a Média do Aluno</h1>
+    <button onclick="validar()">Lançar a média</button>
 
-while (cont<= 4){
-var notas = parseFloat(prompt(`Qual a nota ${cont}?`))
-media=media+notas;
-cont ++
-}
-media=media/4
-if(meida>=60){
-    result= "Aprovado"
-}else{
-    result = "Reprovado"
-}
-window.alert(`O aluno ${nome},tem a media ${media},e esta ${result}`);
-}
-</script>
+    <script>
+        function validar() {
+            let cont = 1;
+            let media = 0;
+            let nome = window.prompt('Qual é o seu nome?');
+
+            while (cont <= 4) {
+                let nota = parseFloat(prompt(`Qual é a nota ${cont}?`));
+                media += nota;
+                cont++;
+            }
+
+            media /= 4;
+
+            let resultado;
+            if (media >= 60) {
+                resultado = "Aprovado";
+            } else {
+                resultado = "Reprovado";
+            }
+
+            window.alert(`O aluno ${nome} tem a média ${media.toFixed(1)} e está ${resultado}.`);
+        }
+    </script>
+
+    <footer>
+        <h2>parseFloat é uma função incorporada no JavaScript que permite converter uma string em um número de ponto flutuante.</h2>
+    </footer>
 </body>
-<footer>
-<style>
-    footer{ bottom:0 ; position: fixed; width: 100%; text-align: left;}
-</style>
-<h2>parseFloat e uma funçao incorporada no JavaScript que permite realizar essa conversao para um numero de ponto flutuante.</h2>
-
-</footer>
 </html>
