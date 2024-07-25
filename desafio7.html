@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <title> Ler Produto e dar desconto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ler Produto e dar desconto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        section {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Dando desconto!</h1>
-<button onclick="desconto()">Iniciar a soma </button>
+    <button onclick="desconto()">Calcular desconto</button>
 
-<section id="resultado">
-    <p> O resultado e:</p>
-</section>
+    <section id="resultado">
+        <p>O resultado será exibido aqui:</p>
+    </section>
 
-<script>
-function desconto(){
-let n1= Number(window.prompt('Qual preço do produto:'))
-let n2= Number(window.prompt('Qual desconto do produto:'))
+    <script>
+        function desconto() {
+            let n1 = Number(window.prompt('Qual é o preço do produto?'));
+            let n2 = Number(window.prompt('Qual é o desconto do produto em %?'));
 
-let desc= n1- (n1 * (n2 / 100))
+            if (isNaN(n1) || isNaN(n2)) {
+                alert('Por favor, insira valores numéricos válidos.');
+                return;
+            }
 
-let res= document.getElementById('resultado')
-res.innerHTML = `<p> O preço do produto cheio e R$ ${n1.toFixed(2)}, o desconto foi de ${n2.toFixed(1)}% resultando no preço final de R$ ${desc.toFixed(2)} reais.<p/>`
+            let desc = n1 - (n1 * (n2 / 100));
 
-}
-</script>
-
+            let res = document.getElementById('resultado');
+            res.innerHTML = `<p>O preço do produto original é R$ ${n1.toFixed(2)}, o desconto aplicado foi de ${n2.toFixed(1)}%, resultando no preço final de R$ ${desc.toFixed(2)}.</p>`;
+        }
+    </script>
 </body>
 </html>
