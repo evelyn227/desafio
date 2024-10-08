@@ -1,0 +1,42 @@
+body {
+    background: linear-gradient(to right, blue, purple, green);
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.gallery-container {
+    position: relative;
+    text-align: center;
+    margin-top: 50px; /* Espaço acima da galeria */
+}
+
+img {
+    width: auto; /* Largura automática para manter proporção */
+    height: 400px; /* Altura fixa para formato retrato */
+    object-fit: cover; /* Cobre a área sem distorcer a imagem */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1; /* Para garantir que a imagem fique acima do fundo */
+}
+
+.gallery-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px; /* Mesma borda da imagem */
+    z-index: 0; /* Fica atrás da imagem */
+    filter: blur(5px); /* Suaviza a cor de fundo */
+}
+
+
+
+
+
