@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Juros do Cartão de Crédito</title>
+    <link rel="stylesheet" href="desafioIA.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Juros do Cartão de Crédito</h1>
+        <form id="jurosForm">
+            <label for="valor">Valor da dívida (R$):</label>
+            <input type="number" id="valor" name="valor" required>
+
+            <label for="juros">Taxa de juros mensal (%):</label>
+            <input type="number" id="juros" name="juros" required>
+
+            <label for="meses">Número de meses:</label>
+            <input type="number" id="meses" name="meses" required>
+
+            <button type="submit">Calcular Juros</button>
+        </form>
+        <div id="resultado"></div>
+    </div>
+    <script src="desafioIA.js"></script>
+</body>
+</html>
