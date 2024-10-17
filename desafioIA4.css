@@ -1,0 +1,63 @@
+/* Estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd; /* Azul claro de fundo */
+    color: #fff;
+    text-align: center;
+}
+
+header {
+    background-color: #008c45; /* Verde vibrante */
+    padding: 20px;
+}
+
+h1 {
+    color: #ffcc00; /* Amarelo vibrante */
+    font-size: 2.5rem;
+}
+
+#bandeiras {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+}
+
+.bandeira {
+    width: 30%;
+    background-color: #0033a0; /* Azul vibrante */
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.bandeira:hover {
+    transform: scale(1.05);
+}
+
+.bandeira h2 {
+    font-size: 1.8rem;
+    color: #ffcc00; /* Amarelo vibrante */
+}
+
+.bandeira img {
+    width: 100%;
+    margin: 15px 0;
+}
+
+.descricao {
+    display: none;
+    background-color: #008c45; /* Verde vibrante */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.descricao.active {
+    display: block;
+}
