@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Folha de Pagamento</title>
+    <link rel="stylesheet" href="salario2.css"> <!-- Vinculando o CSS -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Folha de Pagamento</h1>
+
+    <form id="folhaForm">
+        <div class="form-group">
+            <label for="salario">Salário Base</label>
+            <input type="number" id="salario" name="salario" required>
+        </div>
+        <div class="form-group">
+            <label for="horasExtras">Horas Extras</label>
+            <input type="number" id="horasExtras" name="horasExtras" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoINSS">Desconto INSS</label>
+            <input type="number" id="descontoINSS" name="descontoINSS" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoIRRF">Desconto IRRF</label>
+            <input type="number" id="descontoIRRF" name="descontoIRRF" required>
+        </div>
+        <div class="form-group">
+            <label for="bonus">Bônus</label>
+            <input type="number" id="bonus" name="bonus" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoPlanoSaude">Desconto Plano de Saúde</label>
+            <input type="number" id="descontoPlanoSaude" name="descontoPlanoSaude" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoValeTransporte">Desconto Vale Transporte</label>
+            <input type="number" id="descontoValeTransporte" name="descontoValeTransporte" required>
+        </div>
+        <div class="form-group">
+            <label for="valeAlimentacao">Vale Alimentação</label>
+            <input type="number" id="valeAlimentacao" name="valeAlimentacao" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoFGTS">Desconto FGTS</label>
+            <input type="number" id="descontoFGTS" name="descontoFGTS" required>
+        </div>
+        <div class="form-group">
+            <label for="descontoOutros">Outros Descontos</label>
+            <input type="number" id="descontoOutros" name="descontoOutros" required>
+        </div>
+
+        <div class="form-group">
+            <input type="button" value="Calcular" onclick="calcularFolha()">
+        </div>
+    </form>
+
+    <div class="result" id="resultado"></div>
+</div>
+
+<script src="salario2.js"></script> <!-- Vinculando o JS -->
+</body>
+</html>
