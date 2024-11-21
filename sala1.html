@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folha de Pagamento</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #8a2be2, #ffffff); /* Gradiente roxo e branco */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 60%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 100px; /* Ajuste o tamanho da logo conforme necessário */
+            height: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Logo (adicione o caminho correto para a sua logo) -->
+    <img src="logo.png" alt="Logo" class="logo"> <!-- Substitua o caminho pela sua logo -->
+
+    <h2>Folha de Pagamento</h2>
+    
+    <!-- Formulário -->
+    <form id="payrollForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="salary">Salário (R$):</label>
+        <input type="number" id="salary" name="salary" required>
+
+        <button type="submit">Calcular</button>
+    </form>
+
+    <!-- Resultados -->
+    <div class="result" id="result" style="display: none;">
+        <p><strong>Salário Bruto:</strong> R$ <span id="grossSalary"></span></p>
+        <p><strong>Imposto de Renda:</strong> R$ <span id="incomeTax"></span></p>
+        <p><strong>Salário Líquido:</strong> R$ <span id="netSalary"></span></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('payrollForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var salary = parseFloat(document.getElementById('salary').value);
+        var name = document.getElementById('name').value;
+
+        // Calcular o imposto de renda
+        var taxRate = 0;
+        if (salary > 5000) {
+            taxRate = 0.175;
+        } else if (salary > 4000) {
+            taxRate = 0.12;
+        } else if (salary > 3000) {
+            taxRate = 0.075;
+        } else if (salary > 1800) {
+            taxRate = 0.035;
+        } else {
+            taxRate = 0;
+        }
+
+        var incomeTax = salary * taxRate;
+        var netSalary = salary - incomeTax;
+
+        // Exibir os resultados
+        document.getElementById('grossSalary').textContent = salary.toFixed(2);
+        document.getElementById('incomeTax').textContent = incomeTax.toFixed(2);
+        document.getElementById('netSalary').textContent = netSalary.toFixed(2);
+
+        document.getElementById('result').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>

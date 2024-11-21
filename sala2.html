@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folha de Pagamento</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #8a2be2, #ffffff); /* Gradiente roxo e branco */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 100px; /* Ajuste o tamanho da logo conforme necessário */
+            height: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #8a2be2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6a1b9a;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #8a2be2;
+            color: white;
+            text-align: left;
+        }
+
+        td {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Logo -->
+    <img src="logo.png" alt="Logo" class="logo"> <!-- Substitua o caminho da logo -->
+
+    <h2>Folha de Pagamento</h2>
+    
+    <!-- Formulário -->
+    <form id="payrollForm">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="salary">Salário (R$):</label>
+        <input type="number" id="salary" name="salary" required>
+
+        <button type="submit">Adicionar Registro</button>
+    </form>
+
+    <!-- Tabela de Sumário -->
+    <table id="summaryTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Salário Bruto</th>
+                <th>Imposto de Renda</th>
+                <th>Salário Líquido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os registros serão adicionados aqui -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById('payrollForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var name = document.getElementById('name').value;
+        var salary = parseFloat(document.getElementById('salary').value);
+
+        // Calcular o imposto de renda
+        var taxRate = 0;
+        if (salary > 5000) {
+            taxRate = 0.175;
+        } else if (salary > 4000) {
+            taxRate = 0.12;
+        } else if (salary > 3000) {
+            taxRate = 0.075;
+        } else if (salary > 1800) {
+            taxRate = 0.035;
+        } else {
+            taxRate = 0;
+        }
+
+        var incomeTax = salary * taxRate;
+        var netSalary = salary - incomeTax;
+
+        // Criar uma nova linha na tabela com os dados
+        var table = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow();
+
+        var cellName = newRow.insertCell(0);
+        var cellGrossSalary = newRow.insertCell(1);
+        var cellIncomeTax = newRow.insertCell(2);
+        var cellNetSalary = newRow.insertCell(3);
+
+        // Preencher a linha com os dados calculados
+        cellName.textContent = name;
+        cellGrossSalary.textContent = salary.toFixed(2);
+        cellIncomeTax.textContent = incomeTax.toFixed(2);
+        cellNetSalary.textContent = netSalary.toFixed(2);
+
+        // Limpar os campos após a inserção
+        document.getElementById('payrollForm').reset();
+    });
+</script>
+
+</body>
+</html>
