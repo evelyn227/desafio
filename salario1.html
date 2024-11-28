@@ -113,21 +113,24 @@
         var salary = parseFloat(document.getElementById('salary').value);
         var name = document.getElementById('name').value;
 
-        // Calcular o imposto de renda
-        var taxRate = 0;
-        if (salary > 5000) {
-            taxRate = 0.175;
-        } else if (salary > 4000) {
-            taxRate = 0.12;
-        } else if (salary > 3000) {
-            taxRate = 0.075;
-        } else if (salary > 1800) {
-            taxRate = 0.035;
-        } else {
-            taxRate = 0;
+        // Validação de entrada (garante que o salário seja um valor positivo)
+        if (isNaN(salary) || salary <= 0) {
+            alert("Por favor, insira um salário válido.");
+            return;
         }
 
-        var incomeTax = salary * taxRate;
+        // Calcular o imposto de renda
+        var incomeTax = 0;
+        if (salary > 5000) {
+            incomeTax = (salary - 5000) * 0.175 + (5000 - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
+        } else if (salary > 4000) {
+            incomeTax = (salary - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
+        } else if (salary > 3000) {
+            incomeTax = (salary - 3000) * 0.075 + (3000 - 1800) * 0.035;
+        } else if (salary > 1800) {
+            incomeTax = (salary - 1800) * 0.035;
+        }
+
         var netSalary = salary - incomeTax;
 
         // Exibir os resultados
@@ -141,3 +144,4 @@
 
 </body>
 </html>
+
