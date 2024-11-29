@@ -123,15 +123,17 @@
 
     // Calcular o imposto de renda
     var incomeTax = 0;
-    if (salary > 5000) {
-        incomeTax = (salary - 5000) * 0.175 + (5000 - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
-    } else if (salary > 4000) {
-        incomeTax = (salary - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
-    } else if (salary > 3000) {
-        incomeTax = (salary - 3000) * 0.075 + (3000 - 1800) * 0.035;
-    } else if (salary > 1800) {
-        incomeTax = (salary - 1800) * 0.035;
-    }
+
+if (salary > 5000) {
+    incomeTax = (salary - 5000) * 0.175 + 1000 * 0.12 + 1000 * 0.075 + 1200 * 0.035;
+} else if (salary > 4000) {
+    incomeTax = (salary - 4000) * 0.12 + 1000 * 0.075 + 1200 * 0.035;
+} else if (salary > 3000) {
+    incomeTax = (salary - 3000) * 0.075 + 1200 * 0.035;
+} else if (salary > 1800) {
+    incomeTax = (salary - 1800) * 0.035;
+}
+
 
     // Salário líquido
     var netSalary = salary - incomeTax;
