@@ -108,45 +108,47 @@
 
 <script>
     document.getElementById('payrollForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Captura o valor do salário e substitui vírgula por ponto
-        var salaryStr = document.getElementById('salary').value.replace(',', '.');  // Substitui a vírgula por ponto
-        var salary = parseFloat(salaryStr);  // Converte para número
-        var name = document.getElementById('name').value;
+    event.preventDefault();
+    
+    // Captura o valor do salário e substitui vírgula por ponto
+    var salaryStr = document.getElementById('salary').value.replace(',', '.');  // Substitui a vírgula por ponto
+    var salary = parseFloat(salaryStr);  // Converte para número
+    var name = document.getElementById('name').value;
 
-        // Validação de entrada (garante que o salário seja um valor válido)
-        if (isNaN(salary) || salary <= 0) {
-            alert("Por favor, insira um salário válido.");
-            return;
-        }
+    // Validação de entrada (garante que o salário seja um valor válido)
+    if (isNaN(salary) || salary <= 0) {
+        alert("Por favor, insira um salário válido.");
+        return;
+    }
 
-        // Calcular o imposto de renda
-        var incomeTax = 0;
-        if (salary > 5000) {
-            incomeTax = (salary - 5000) * 0.175 + (5000 - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
-        } else if (salary > 4000) {
-            incomeTax = (salary - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
-        } else if (salary > 3000) {
-            incomeTax = (salary - 3000) * 0.075 + (3000 - 1800) * 0.035;
-        } else if (salary > 1800) {
-            incomeTax = (salary - 1800) * 0.035;
-        }
+    // Calcular o imposto de renda
+    var incomeTax = 0;
+    if (salary > 5000) {
+        incomeTax = (salary - 5000) * 0.175 + (5000 - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
+    } else if (salary > 4000) {
+        incomeTax = (salary - 4000) * 0.12 + (4000 - 3000) * 0.075 + (3000 - 1800) * 0.035;
+    } else if (salary > 3000) {
+        incomeTax = (salary - 3000) * 0.075 + (3000 - 1800) * 0.035;
+    } else if (salary > 1800) {
+        incomeTax = (salary - 1800) * 0.035;
+    }
 
-        var netSalary = salary - incomeTax;
+    // Salário líquido
+    var netSalary = salary - incomeTax;
 
-        // Função para formatar o número com vírgula para a exibição
-        function formatCurrency(value) {
-            return value.toFixed(2).replace('.', ',');
-        }
+    // Função para formatar o número com vírgula para a exibição
+    function formatCurrency(value) {
+        return value.toFixed(2).replace('.', ',');
+    }
 
-        // Exibir os resultados
-        document.getElementById('grossSalary').textContent = formatCurrency(salary);
-        document.getElementById('incomeTax').textContent = formatCurrency(incomeTax);
-        document.getElementById('netSalary').textContent = formatCurrency(netSalary);
+    // Exibir os resultados
+    document.getElementById('grossSalary').textContent = formatCurrency(salary);
+    document.getElementById('incomeTax').textContent = formatCurrency(incomeTax);
+    document.getElementById('netSalary').textContent = formatCurrency(netSalary);
 
-        document.getElementById('result').style.display = 'block';
-    });
+    document.getElementById('result').style.display = 'block';
+});
+
 </script>
 
 </body>
