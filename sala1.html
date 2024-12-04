@@ -6,138 +6,116 @@
     <title>Folha de Pagamento</title>
     <style>
         body {
-            background: linear-gradient(to right, #8a2be2, #ffffff); /* Gradiente roxo e branco */
+            background: linear-gradient(to right, #6a1b9a, #fff);
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 20px;
         }
-
         .container {
-            width: 60%;
-            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        .logo {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            width: 100px; /* Ajuste o tamanho da logo conforme necessário */
-            height: auto;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
+        .header img {
+            width: 100px; /* Substitua com a largura da sua logo */
+        }
         h2 {
+            color: #6a1b9a;
             text-align: center;
-            color: #333;
         }
-
         label {
             font-size: 16px;
-            color: #333;
             margin-top: 10px;
         }
-
-        input[type="text"],
-        input[type="number"] {
+        input[type="text"], input[type="number"], button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
         }
-
-        .result {
-            margin-top: 20px;
-        }
-
-        .result p {
-            font-size: 18px;
-            color: #333;
-        }
-
         button {
-            width: 100%;
-            padding: 10px;
-            background-color: #8a2be2;
+            background-color: #6a1b9a;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
-            background-color: #6a1b9a;
+            background-color: #9c4dca;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Logo (adicione o caminho correto para a sua logo) -->
-    <img src="logo.png" alt="Logo" class="logo"> <!-- Substitua o caminho pela sua logo -->
-
-    <h2>Folha de Pagamento</h2>
-    
-    <!-- Formulário -->
-    <form id="payrollForm">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="salary">Salário (R$):</label>
-        <input type="number" id="salary" name="salary" required>
-
-        <button type="submit">Calcular</button>
-    </form>
-
-    <!-- Resultados -->
-    <div class="result" id="result" style="display: none;">
-        <p><strong>Salário Bruto:</strong> R$ <span id="grossSalary"></span></p>
-        <p><strong>Imposto de Renda:</strong> R$ <span id="incomeTax"></span></p>
-        <p><strong>Salário Líquido:</strong> R$ <span id="netSalary"></span></p>
-    </div>
-</div>
-
-<script>
-    document.getElementById('payrollForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    <div class="container">
+        <div class="header">
+            <!-- Substitua o caminho da imagem pela sua logo -->
+            <img src="logo.png" alt="Logo">
+        </div>
         
-        var salary = parseFloat(document.getElementById('salary').value);
-        var name = document.getElementById('name').value;
+        <h2>Folha de Pagamento</h2>
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite o nome">
 
-        // Calcular o imposto de renda
-        var taxRate = 0;
-        if (salary > 5000) {
-            taxRate = 0.175;
-        } else if (salary > 4000) {
-            taxRate = 0.12;
-        } else if (salary > 3000) {
-            taxRate = 0.075;
-        } else if (salary > 1800) {
-            taxRate = 0.035;
-        } else {
-            taxRate = 0;
+        <label for="salario">Salário:</label>
+        <input type="number" id="salario" placeholder="Digite o salário" oninput="calcularImposto()">
+
+        <button onclick="calcularImposto()">Calcular</button>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function calcularImposto() {
+            var nome = document.getElementById('nome').value;
+            var salario = parseFloat(document.getElementById('salario').value);
+
+            if (isNaN(salario) || salario <= 0) {
+                document.getElementById('result').innerHTML = 'Por favor, insira um valor válido para o salário.';
+                return;
+            }
+
+            var imposto = 0;
+
+            if (salario > 5000) {
+                imposto = salario * 0.175;
+            } else if (salario > 4000) {
+                imposto = salario * 0.12;
+            } else if (salario > 3000) {
+                imposto = salario * 0.075;
+            } else if (salario > 1800) {
+                imposto = salario * 0.035;
+            }
+
+            var salarioLiquido = salario - imposto;
+
+            var resultText = `
+                <strong>Nome:</strong> ${nome || 'Não informado'}<br>
+                <strong>Salário Bruto:</strong> R$ ${salario.toFixed(2)}<br>
+                <strong>Imposto de Renda:</strong> R$ ${imposto.toFixed(2)}<br>
+                <strong>Salário Líquido:</strong> R$ ${salarioLiquido.toFixed(2)}
+            `;
+
+            document.getElementById('result').innerHTML = resultText;
         }
-
-        var incomeTax = salary * taxRate;
-        var netSalary = salary - incomeTax;
-
-        // Exibir os resultados
-        document.getElementById('grossSalary').textContent = salary.toFixed(2);
-        document.getElementById('incomeTax').textContent = incomeTax.toFixed(2);
-        document.getElementById('netSalary').textContent = netSalary.toFixed(2);
-
-        document.getElementById('result').style.display = 'block';
-    });
-</script>
+    </script>
 
 </body>
 </html>
