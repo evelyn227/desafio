@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,169 +7,169 @@
     <title>Folha de Pagamento</title>
     <style>
         body {
-            background: linear-gradient(to right, #8a2be2, #ffffff); /* Gradiente roxo e branco */
+            background: linear-gradient(to right, #6a1b9a, #fff);
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 20px;
         }
-
         .container {
-            width: 80%;
-            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        .logo {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            width: 100px; /* Ajuste o tamanho da logo conforme necessário */
-            height: auto;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
+        .header img {
+            width: 100px; /* Substitua com a largura da sua logo */
+        }
         h2 {
+            color: #6a1b9a;
             text-align: center;
-            color: #333;
         }
-
         label {
             font-size: 16px;
-            color: #333;
             margin-top: 10px;
         }
-
-        input[type="text"],
-        input[type="number"] {
+        input[type="text"], input[type="number"], button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
         }
-
         button {
-            width: 100%;
-            padding: 10px;
-            background-color: #8a2be2;
+            background-color: #6a1b9a;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
             cursor: pointer;
         }
-
         button:hover {
-            background-color: #6a1b9a;
+            background-color: #9c4dca;
         }
-
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
         table {
             width: 100%;
-            margin-top: 30px;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-
-        table, th, td {
-            border: 1px solid #ddd;
+        th, td {
             padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
         }
-
         th {
-            background-color: #8a2be2;
+            background-color: #6a1b9a;
             color: white;
-            text-align: left;
-        }
-
-        td {
-            text-align: right;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- Logo -->
-    <img src="logo.png" alt="Logo" class="logo"> <!-- Substitua o caminho da logo -->
-
-    <h2>Folha de Pagamento</h2>
-    
-    <!-- Formulário -->
-    <form id="payrollForm">
-        <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="salary">Salário (R$):</label>
-        <input type="number" id="salary" name="salary" required>
-
-        <button type="submit">Adicionar Registro</button>
-    </form>
-
-    <!-- Tabela de Sumário -->
-    <table id="summaryTable">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Salário Bruto</th>
-                <th>Imposto de Renda</th>
-                <th>Salário Líquido</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Os registros serão adicionados aqui -->
-        </tbody>
-    </table>
-</div>
-
-<script>
-    document.getElementById('payrollForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+    <div class="container">
+        <div class="header">
+            <!-- Substitua o caminho da imagem pela sua logo -->
+            <img src="logo.png" alt="Logo">
+        </div>
         
-        var name = document.getElementById('name').value;
-        var salary = parseFloat(document.getElementById('salary').value);
+        <h2>Folha de Pagamento</h2>
+        
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Digite o nome">
 
-        // Calcular o imposto de renda
-        var taxRate = 0;
-        if (salary > 5000) {
-            taxRate = 0.175;
-        } else if (salary > 4000) {
-            taxRate = 0.12;
-        } else if (salary > 3000) {
-            taxRate = 0.075;
-        } else if (salary > 1800) {
-            taxRate = 0.035;
-        } else {
-            taxRate = 0;
+        <label for="salario">Salário:</label>
+        <input type="number" id="salario" placeholder="Digite o salário">
+
+        <button onclick="calcularImposto()">Calcular</button>
+
+        <!-- Tabela de Resultados -->
+        <div class="result">
+            <h3>Resumo de Pagamento</h3>
+            <table id="resultTable">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Salário Bruto</th>
+                        <th>Imposto de Renda</th>
+                        <th>Salário Líquido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- As linhas de resultados serão inseridas aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Função para calcular imposto e salário líquido
+        function calcularImposto() {
+            var nome = document.getElementById('nome').value;
+            var salario = parseFloat(document.getElementById('salario').value);
+
+            // Verificar se o salário é válido
+            if (isNaN(salario) || salario <= 0) {
+                alert('Por favor, insira um valor válido para o salário.');
+                return;
+            }
+
+            // Faixas de imposto
+            var faixas = [
+                { limite: 5000, taxa: 0.175 },
+                { limite: 4000, taxa: 0.12 },
+                { limite: 3000, taxa: 0.075 },
+                { limite: 1800, taxa: 0.035 },
+                { limite: 0, taxa: 0 }
+            ];
+
+            // Calcular imposto
+            var imposto = 0;
+            for (var i = 0; i < faixas.length; i++) {
+                if (salario > faixas[i].limite) {
+                    imposto = salario * faixas[i].taxa;
+                    break;
+                }
+            }
+
+            // Calcular salário líquido
+            var salarioLiquido = salario - imposto;
+
+            // Preencher a tabela de resultados
+            preencherTabela(nome, salario, imposto, salarioLiquido);
         }
 
-        var incomeTax = salary * taxRate;
-        var netSalary = salary - incomeTax;
+        // Função para preencher a tabela de resultados
+        function preencherTabela(nome, salario, imposto, salarioLiquido) {
+            var tabela = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
 
-        // Criar uma nova linha na tabela com os dados
-        var table = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
-        var newRow = table.insertRow();
+            // Criar nova linha para os resultados
+            var novaLinha = tabela.insertRow();
 
-        var cellName = newRow.insertCell(0);
-        var cellGrossSalary = newRow.insertCell(1);
-        var cellIncomeTax = newRow.insertCell(2);
-        var cellNetSalary = newRow.insertCell(3);
+            // Adicionar células à nova linha
+            var celulaNome = novaLinha.insertCell(0);
+            var celulaSalarioBruto = novaLinha.insertCell(1);
+            var celulaImposto = novaLinha.insertCell(2);
+            var celulaSalarioLiquido = novaLinha.insertCell(3);
 
-        // Preencher a linha com os dados calculados
-        cellName.textContent = name;
-        cellGrossSalary.textContent = salary.toFixed(2);
-        cellIncomeTax.textContent = incomeTax.toFixed(2);
-        cellNetSalary.textContent = netSalary.toFixed(2);
-
-        // Limpar os campos após a inserção
-        document.getElementById('payrollForm').reset();
-    });
-</script>
+            // Preencher as células com os dados calculados
+            celulaNome.textContent = nome || 'Não informado';
+            celulaSalarioBruto.textContent = `R$ ${salario.toFixed(2)}`;
+            celulaImposto.textContent = `R$ ${imposto.toFixed(2)}`;
+            celulaSalarioLiquido.textContent = `R$ ${salarioLiquido.toFixed(2)}`;
+        }
+    </script>
 
 </body>
 </html>
